@@ -59,7 +59,7 @@
       <div class="modal">
         <div class="modal-box">
           <h3 class="font-bold text-lg">This is Base64</h3>
-          <p class="py-4">{avatar}</p>
+          <p class="py-4 overflow-hidden">{avatar}</p>
           <div class="modal-action">
             <label for="my-modal" class="btn btn-secondary">Yay!</label>
           </div>
