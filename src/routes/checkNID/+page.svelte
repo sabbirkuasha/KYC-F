@@ -10,7 +10,8 @@
         <div class="w-auto lg:w-2/6 flex flex-col justify-center justify-items-center">
             <h1 class="rounded text-center p-2 ring-2">Front NID</h1>
             <div class="mt-2 w-full flex justify-center">
-                <Card />
+                <Card 
+                    img = "https://placeimg.com/400/225/paper"/>
             </div>
             
         </div>
@@ -19,9 +20,9 @@
             <span class="text-2xl">&</span> 
         </div> 
 
-        <div class="w-auto lg:w-2/6 flex flex-col justify-center">
+        <div class="w-auto lg:w-2/6 flex flex-col">
             <h1 class="rounded text-center p-2 ring-2">Back NID</h1>
-            <div class="mt-2 w-full flex justify-center">
+            <div class="mt-2 w-full flex justify-center items-start">
                 <Card   title="Upload Back Side NID"
                     img = "https://placeimg.com/400/225/paper"
                     buttonText = "Upload Back Side of your NID"/>
@@ -31,4 +32,5 @@
         
     </div>
 
+    
 </main>

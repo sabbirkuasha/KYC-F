@@ -4,9 +4,9 @@
 	import '../app.postcss';
 	import NavBar from '$lib/NavBar.svelte';
 
-	$: console.log("page info is: ")
-	$: console.log($page.routeId)
-	$: console.log($page)
+	// $: console.log("page info is: ")
+	// $: console.log($page.routeId)
+	// $: console.log($page)
 
 </script>
 
@@ -17,8 +17,9 @@
 		Menu2url = "/checkNID"/>
 
 <main>
-	<Transition url = {$page.url}>
+	<!-- <Transition url = {$page.url}>
 		<slot />
-	</Transition>
+	</Transition> -->
+	<slot />
 </main>
 
