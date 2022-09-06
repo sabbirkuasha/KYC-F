@@ -6,16 +6,18 @@
     let fileInput
     let files
     let avatar
+    let sendData
 
     function getBase64(image){
       const reader = new FileReader()
       reader.readAsDataURL(image)
 
-      console.log("uploaded image is: ")
-      console.log(image)
       reader.onload = e =>{
         avatar = e.target.result
-        console.log(avatar)
+        // console.log(avatar)
+        sendData = (avatar.substr(avatar.indexOf(',') + 1));
+        // console.log("base64: ")
+        // console.log(sendData)
       }
     }
 
@@ -28,10 +30,30 @@
       getBase64(files[0])
     }
 
-    
+let data
+async function fetchNow(){
+  // console.log("Send ML clicked")
+  // console.log(sendData)
 
+  try{
+      const response = await fetch('http://192.168.100.130:8080/id_info', {
+        method: 'POST',
+        Credential: 'same-origin',
+        Headers: {
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({file: sendData})
+      });
+      data = await response.json();
+      console.log(data)
+    }
+    catch (error){
+      console.error(`Error in load function for /: ${error}`)
+    }  
+}
     
 </script>
+
 
 <div class="card w-96 bg-slate-900 shadow-xl">
     <figure>
@@ -52,16 +74,23 @@
     </div>
     {#if avatar}
       <!-- The button to open modal -->
-      <label for="my-modal" class="btn modal-button btn-secondary">Send Data to ML</label>
+      <label for="my-modal" class="btn modal-button btn-secondary" on:click={fetchNow} >Send Data to ML</label>
 
       <!-- Put this part before </body> tag -->
       <input type="checkbox" id="my-modal" class="modal-toggle" />
       <div class="modal">
         <div class="modal-box">
-          <h3 class="font-bold text-lg">This is Base64</h3>
-          <p class="py-4 overflow-hidden">{avatar}</p>
+          {#if data}
+            <h3 class="font-bold text-lg">Hello {data.NAME}, Here is your data </h3>
+            <p class="py-2 overflow-hidden text-3xl">{data.NAME}</p>
+            <p class="overflow-hidden text-2xl">{data.NID_NUMBER}</p>
+            <p class="overflow-hidden text-xl">{data.DATE_OF_BIRTH}</p>
+          {:else}
+            <h1 class="font-bold text-lg"> LOADING...</h1>
+          {/if}
+         
           <div class="modal-action">
-            <label for="my-modal" class="btn btn-secondary">Yay!</label>
+            <label for="my-modal"  class="btn btn-secondary">Yay!</label>
           </div>
         </div>
       </div>
