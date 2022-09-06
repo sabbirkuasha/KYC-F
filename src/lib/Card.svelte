@@ -14,43 +14,37 @@
 
       reader.onload = e =>{
         avatar = e.target.result
-        // console.log(avatar)
         sendData = (avatar.substr(avatar.indexOf(',') + 1));
-        // console.log("base64: ")
-        // console.log(sendData)
       }
     }
 
     function uploadBtn() {
       fileInput.click()
-    
     }
+    
     function uploadOnChange() {
-      console.log("base64 start")
       getBase64(files[0])
     }
 
-let data
-async function fetchNow(){
-  // console.log("Send ML clicked")
-  // console.log(sendData)
-
-  try{
-      const response = await fetch('http://192.168.100.130:8080/id_info', {
-        method: 'POST',
-        Credential: 'same-origin',
-        Headers: {
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify({file: sendData})
-      });
-      data = await response.json();
-      console.log(data)
-    }
-    catch (error){
-      console.error(`Error in load function for /: ${error}`)
-    }  
-}
+  let data
+  async function fetchNow(){
+    data = null
+    try{
+        const response = await fetch('http://192.168.100.130:8080/id_info', {
+          method: 'POST',
+          Credential: 'same-origin',
+          Headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify({file: sendData})
+        });
+        data = await response.json();
+        console.log(data)
+      }
+      catch (error){
+        console.error(`Error in load function for /: ${error}`)
+      }  
+  }
     
 </script>
 
@@ -95,11 +89,4 @@ async function fetchNow(){
         </div>
       </div>
     {/if}
-
-
-    <!-- {#if avatar}
-      <div class="w-full px-6 pb-5 m-auto">
-        <button class="btn m-auto w-full btn-secondary">Send Data to ML</button>
-      </div>
-    {/if} -->
 </div>
